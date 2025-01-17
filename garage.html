@@ -1,0 +1,193 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Garage Prediction - Intrusion Detection System</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-image: url("{% static 'home/images/iot.jpg' %}");
+            background-size: cover;
+            background-position: center;
+            color: #fff;
+        }
+
+        header {
+            padding: 30px;
+            text-align: center;
+            background: rgba(0, 0, 0, 0.5); /* Dark overlay for better readability */
+        }
+
+        header .logo h1 {
+            font-size: 3rem;
+            margin: 0;
+            font-weight: bold;
+            color: #ff00cc; /* Neon Pink */
+        }
+
+        .form-container {
+            width: 350px;
+            margin: 50px auto;
+            background: rgba(0, 0, 0, 0.7); /* Dark background for form */
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+        }
+
+        .form-container h2 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+            text-align: center;
+            color: #ff00cc; /* Neon Pink */
+        }
+
+        .form-container input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            font-size: 1.1rem;
+            border: none;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        .form-container input[type="number"] {
+            background: #333;
+            color: #fff;
+        }
+
+        .form-container button {
+            width: 100%;
+            padding: 10px;
+            background-color: #ff00cc; /* Neon Pink */
+            color: white;
+            border: none;
+            font-size: 1.2rem;
+            cursor: pointer;
+            border-radius: 4px;
+            transition: background-color 0.3s ease;
+        }
+
+        .form-container button:hover {
+            background-color: #ff66b3; /* Lightened Pink */
+        }
+
+        footer {
+            background: rgba(0, 0, 0, 0.8);
+            text-align: center;
+            padding: 20px;
+            color: #fff;
+            font-size: 1rem;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+
+        /* Modal Styles */
+        .modal {
+            display: none; /* Hidden by default */
+            position: fixed; /* Stay in place */
+            z-index: 1; /* Sit on top */
+            left: 0;
+            top: 0;
+            width: 100%; /* Full width */
+            height: 100%; /* Full height */
+            overflow: auto; /* Enable scroll if needed */
+            background-color: rgba(0, 0, 0, 0.5); /* Black with opacity */
+        }
+
+        .modal-content {
+            background-color: #333;
+            color: #fff;
+            padding: 20px;
+            margin: 15% auto;
+            border-radius: 8px;
+            width: 80%;
+            max-width: 400px;
+            text-align: center;
+        }
+
+        .close {
+            color: #aaa;
+            font-size: 28px;
+            font-weight: bold;
+            position: absolute;
+            top: 0;
+            right: 15px;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: #ff00cc; /* Neon Pink */
+            text-decoration: none;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <h1>Intrusion Detection System</h1>
+            <p>Garage Attack Prediction</p>
+        </div>
+    </header>
+
+    <main>
+        <div class="form-container">
+            <h2>Garage Attack Prediction</h2>
+            <form method="POST">
+                {% csrf_token %}
+                <label for="door_state">Door State (0 = Closed, 1 = Open):</label>
+                <input type="number" id="door_state" name="door_state" min="0" max="1" required><br><br>
+
+                <label for="sphone_signal">Smartphone Signal (0 = No Signal, 1 = Signal Detected):</label>
+                <input type="number" id="sphone_signal" name="sphone_signal" min="0" max="1" required><br><br>
+
+                <label for="hour">Hour (0-23):</label>
+                <input type="number" id="hour" name="hour" min="0" max="23" required><br><br>
+
+                <label for="minute">Minute (0-59):</label>
+                <input type="number" id="minute" name="minute" min="0" max="59" required><br><br>
+
+                <label for="day_of_week">Day of the Week (0 = Sunday, 1 = Monday, ..., 6 = Saturday):</label>
+                <input type="number" id="day_of_week" name="day_of_week" min="0" max="6" required><br><br>
+
+                <button type="submit">Predict</button>
+            </form>
+        </div>
+
+        {% if attack is not none %}
+            <script>
+                // Show modal only if attack is detected
+                window.onload = function() {
+                    {% if attack == 1 %}
+                        var modal = document.getElementById("myModal");
+                        modal.style.display = "block";
+                    {% endif %}
+                };
+
+                // Close the modal when the user clicks on <span> (x)
+                function closeModal() {
+                    var modal = document.getElementById("myModal");
+                    modal.style.display = "none";
+                }
+            </script>
+
+            <div id="myModal" class="modal">
+                <div class="modal-content">
+                    <span class="close" onclick="closeModal()">&times;</span>
+                    <h2>Attack Detected!</h2>
+                    <p>Type: {{ attack_type }}</p>
+                </div>
+            </div>
+        {% endif %}
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Intrusion Detection System. All rights reserved.</p>
+    </footer>
+</body>
+</html>

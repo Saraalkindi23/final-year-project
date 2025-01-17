@@ -1,0 +1,147 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IoT Dashboard - Intrusion Detection System</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-image: url("{% static 'home/images/iot.jpg' %}");
+            background-size: cover;
+            background-position: center;
+            color: #fff;
+        }
+
+        header {
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.5);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        header .logo h1 {
+            font-size: 2rem;
+            margin: 0;
+            font-weight: bold;
+            color: #ff00cc;
+        }
+
+        header .logo p {
+            margin: 0;
+            font-size: 1rem;
+            color: #ddd;
+        }
+
+        header .logout-button {
+            background-color: #ff00cc;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            text-decoration: none;
+        }
+
+        header .logout-button:hover {
+            background-color: #ff66b3;
+        }
+
+        .button-container {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin-top: 50px;
+        }
+
+        .button-item {
+            width: 200px;
+            height: 250px;
+            background: rgba(0, 0, 0, 0.7);
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+            text-align: center;
+            padding: 20px;
+            cursor: pointer;
+            transition: transform 0.3s ease, background-color 0.3s ease;
+        }
+
+        .button-item img {
+            width: 100px;
+            height: 100px;
+            margin-bottom: 20px;
+        }
+
+        .button-item h3 {
+            font-size: 1.5rem;
+            color: #ff00cc;
+            margin-bottom: 15px;
+        }
+
+        .button-item:hover {
+            transform: scale(1.05);
+            background-color: #ff66b3;
+        }
+
+        footer {
+            background: rgba(0, 0, 0, 0.8);
+            text-align: center;
+            padding: 20px;
+            color: #fff;
+            font-size: 1rem;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo">
+            <h1>IoT Dashboard</h1>
+            <p>Secure Your Devices</p>
+        </div>
+        <a href="{% url 'home' %}" class="logout-button">Logout</a>
+    </header>
+
+    <main>
+        <div class="button-container">
+            <!-- Smart Fridge Button -->
+            <div class="button-item" onclick="window.location.href='{% url 'fridge' %}'">
+                <img src="{% static 'home/images/fridge-icon.png' %}" alt="Smart Fridge">
+                <h3>Smart Fridge</h3>
+            </div>
+
+            <!-- Garage Door Button -->
+            <div class="button-item" onclick="window.location.href='{% url 'garage' %}'">
+                <img src="{% static 'home/images/garage-icon.png' %}" alt="Garage Door">
+                <h3>Garage Door</h3>
+            </div>
+
+            <!-- Motion Light Button -->
+            <div class="button-item" onclick="window.location.href='{% url 'light' %}'">
+                <img src="{% static 'home/images/motion-light-icon.png' %}" alt="Motion Light">
+                <h3>Motion Light</h3>
+            </div>
+
+            <!-- GPS Tracker Button -->
+            <div class="button-item" onclick="window.location.href='{% url 'gps' %}'">
+                <img src="{% static 'home/images/gps-icon.png' %}" alt="GPS Tracker">
+                <h3>GPS Tracker</h3>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Intrusion Detection System. All rights reserved.</p>
+    </footer>
+
+</body>
+</html>

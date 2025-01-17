@@ -1,0 +1,186 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome to IDSIOT</title>
+    <style>
+        /* Apply background image */
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+
+            background-image: url("{% static 'home/images/iot.jpg' %}");
+            background-size: cover;
+            background-position: center;
+            color: #fff;
+        }
+
+        header {
+            padding: 30px;
+            text-align: center;
+            background: rgba(0, 0, 0, 0.5); /* Dark overlay for better readability */
+        }
+
+        header .logo h1 {
+            font-size: 3rem;
+            margin: 0;
+            font-weight: bold;
+            color: #ff00cc; /* Neon Pink */
+        }
+
+        header .logo p {
+            font-size: 1.2rem;
+            margin-top: 10px;
+            color: #00b3ff; /* Bright Blue */
+        }
+
+        header nav ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 20px 0;
+        }
+
+        header nav ul li {
+            display: inline;
+            margin: 0 15px;
+        }
+
+        header nav ul li a {
+            color: #00b3ff; /* Bright Blue */
+            text-decoration: none;
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+
+        .hero {
+            text-align: center;
+            padding: 100px 20px;
+            background: rgba(0, 0, 0, 0.6); /* Darker background for the hero section */
+        }
+
+        .hero h2 {
+            font-size: 4rem;
+            margin: 0;
+            color: #ff00cc; /* Neon Pink */
+        }
+
+        .hero p {
+            font-size: 1.5rem;
+            margin: 10px 0;
+            color: #ffffff; /* White text */
+        }
+
+        .cta-button {
+            background-color: #ff00cc; /* Neon Pink */
+            color: #fff;
+            padding: 15px 30px;
+            text-transform: uppercase;
+            font-weight: bold;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            display: block; /* Ensures buttons are stacked vertically */
+            margin: 0 auto 20px; /* Centers the button and adds margin-bottom */
+        }
+
+        .cta-button:hover {
+            background-color: #ff66b3; /* Lightened Pink */
+        }
+
+        .login-button {
+            background-color: #00b3ff; /* Bright Blue */
+            color: #fff;
+            padding: 15px 30px;
+            text-transform: uppercase;
+            font-weight: bold;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            display: block; /* Ensures buttons are stacked vertically */
+            margin: 0 auto; /* Centers the button */
+        }
+
+        .login-button:hover {
+            background-color: #0099cc; /* Darker Blue */
+        }
+
+        .info-section {
+            background: rgba(0, 0, 0, 0.7); /* Dark background for sections */
+            padding: 60px 20px;
+            text-align: center;
+        }
+
+        .info-section h3 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+            color: #00b3ff; /* Bright Blue */
+        }
+
+        .info-section p, .info-section ul {
+            font-size: 1.2rem;
+            color: #ff00cc; /* Neon Pink */
+        }
+
+        footer {
+            background: rgba(0, 0, 0, 0.8);
+            text-align: center;
+            padding: 20px;
+            color: #fff;
+            font-size: 1rem;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <h1>Intrusion Detection system IoT</h1>
+            <p> IoT Security </p>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="#about">About</a></li>
+                <li><a href="#features">Features</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero">
+            <h2>Welcome to IDS portal</h2>
+            <p>Your go-to platform for the latest in IoT Security.</p>
+            <a href="#features" class="cta-button">Explore Features</a>
+            <!-- Login Button with added margin-top -->
+            <a href="{% url 'login' %}" class="login-button">Login</a>
+        </section>
+
+        <section id="about" class="info-section">
+            <h3>About IDSIOT</h3>
+            <p>We provide cutting-edge IoT Security solutions that revolutionize the way industries operate.</p>
+        </section>
+
+        <section id="features" class="info-section">
+            <h3>Key Features</h3>
+            <ul>
+                <li>Real-time IoT monitoring</li>
+                <li>Data-driven analytics</li>
+                <li>Easy integration with existing systems</li>
+            </ul>
+        </section>
+
+        <section id="contact" class="info-section">
+            <h3>Contact Us</h3>
+            <p>Have questions? Get in touch with us to learn more!</p>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 IDSIOT. All rights reserved.</p>
+    </footer>
+</body>
+</html>

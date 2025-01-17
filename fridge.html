@@ -1,0 +1,188 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fridge Temperature Prediction - Intrusion Detection System</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-image: url("{% static 'home/images/iot.jpg' %}");
+            background-size: cover;
+            background-position: center;
+            color: #fff;
+        }
+
+        header {
+            padding: 30px;
+            text-align: center;
+            background: rgba(0, 0, 0, 0.5);
+        }
+
+        header .logo h1 {
+            font-size: 3rem;
+            margin: 0;
+            font-weight: bold;
+            color: #ff00cc;
+        }
+
+        .form-container {
+            width: 350px;
+            margin: 50px auto;
+            background: rgba(0, 0, 0, 0.7);
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+        }
+
+        .form-container h2 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+            text-align: center;
+            color: #ff00cc;
+        }
+
+        .form-container input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            font-size: 1.1rem;
+            border: none;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        .form-container input[type="number"] {
+            background: #333;
+            color: #fff;
+        }
+
+        .form-container button {
+            width: 100%;
+            padding: 10px;
+            background-color: #ff00cc;
+            color: white;
+            border: none;
+            font-size: 1.2rem;
+            cursor: pointer;
+            border-radius: 4px;
+            transition: background-color 0.3s ease;
+        }
+
+        .form-container button:hover {
+            background-color: #ff66b3;
+        }
+
+        footer {
+            background: rgba(0, 0, 0, 0.8);
+            text-align: center;
+            padding: 20px;
+            color: #fff;
+            font-size: 1rem;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+
+        .modal-content {
+            background-color: #333;
+            color: #fff;
+            padding: 20px;
+            margin: 15% auto;
+            border-radius: 8px;
+            width: 80%;
+            max-width: 400px;
+            text-align: center;
+        }
+
+        .close {
+            color: #aaa;
+            font-size: 28px;
+            font-weight: bold;
+            position: absolute;
+            top: 0;
+            right: 15px;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: #ff00cc;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <h1>Fridge Temperature Prediction</h1>
+            <p>Intrusion Detection System</p>
+        </div>
+    </header>
+
+    <main>
+        <div class="form-container">
+            <h2>Enter Fridge Data</h2>
+            <form method="POST">
+                {% csrf_token %}
+                <label for="fridge_temp">Fridge Temperature:</label>
+                <input type="number" step="0.1" name="fridge_temp" id="fridge_temp" required>
+
+                <label for="temp_condition">Temperature Condition:</label>
+                <select name="temp_condition" id="temp_condition" required>
+                    <option value="high">High</option>
+                    <option value="low">Low</option>
+                </select>
+
+                <button type="submit">Predict</button>
+            </form>
+        </div>
+
+        {% if is_attack is not None %}
+            <script>
+                window.onload = function() {
+                    {% if is_attack == 1 %}
+                        var modal = document.getElementById("myModal");
+                        modal.style.display = "block";
+                    {% endif %}
+                };
+
+                function closeModal() {
+                    var modal = document.getElementById("myModal");
+                    modal.style.display = "none";
+                }
+            </script>
+
+            <div id="myModal" class="modal">
+                <div class="modal-content">
+                    <span class="close" onclick="closeModal()">&times;</span>
+                    <h2>Attack Detected!</h2>
+                    <p>Type: {{ attack_type }}</p>
+                </div>
+            </div>
+        {% endif %}
+
+        {% if error %}
+        <div class="error">
+            <p><strong>Error:</strong> {{ error }}</p>
+        </div>
+        {% endif %}
+    </main>
+
+    <footer>
+        <p>&copy; 2024 IDSIOT. All rights reserved.</p>
+    </footer>
+</body>
+</html>
